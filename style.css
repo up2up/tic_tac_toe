@@ -1,0 +1,36 @@
+.table
+{
+    display: table;
+    border: 1px solid black;
+    width: 60%;
+    height: 50%;
+    margin: 0 auto;
+}
+.row
+{
+    display: table-row;
+    border: 1px solid black;
+    width: 30%;
+    height: 30%;
+
+}
+.cell
+{
+    display: table-cell;
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid black;
+    width: 10%;
+    height: 150px;
+    text-align: center;
+    font-size: 80px;
+    padding-top: 50px;
+}
+.cellX{
+    color: lightpink;
+}
+.cellO{
+    color: lightgreen;
+}
