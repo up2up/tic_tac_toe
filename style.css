@@ -1,36 +1,79 @@
-.table
-{
-    display: table;
-    border: 1px solid black;
-    width: 60%;
-    height: 50%;
-    margin: 0 auto;
-}
-.row
-{
-    display: table-row;
-    border: 1px solid black;
-    width: 30%;
-    height: 30%;
+* {
+    box-sizing: border-box;
+  }
 
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+.selection{
+    width: 800px;
+    height:100px;
+    margin:0 auto;
+    text-align: center;
 }
-.cell
-{
+.figX, .figO{
+    height: 50px;
+    width:200px;
+}
+.table {
+    display: table;
+    margin: 0 auto;
+    margin-top: 20px;  
+    table-layout: fixed;
+}
+
+.row {
+    display: table-row;
+    width: 300px;
+    table-layout: fixed;
+}
+
+.cell {
     display: table-cell;
-    border: solid;
-    border-width: thin;
-    padding-left: 5px;
-    padding-right: 5px;
-    border: 1px solid black;
-    width: 10%;
-    height: 150px;
+    border: 1px solid grey;
+    width: 100px;
+    height: 100px;
     text-align: center;
     font-size: 80px;
-    padding-top: 50px;
+    table-layout: fixed;
 }
-.cellX{
+
+#one, #four, #seven {
+    border-left: none;
+}
+
+#one, #two, #three {
+    border-top: none;
+}
+
+#three, #six, #nine {
+    border-right: none;
+}
+
+#seven, #eight, #nine {
+    border-bottom: none;
+}
+
+.cellX {
     color: lightpink;
 }
-.cellO{
+
+.cellO {
     color: lightgreen;
+}
+
+.reset-button{
+    margin: 10px auto;
+    display:block;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+footer{
+    text-align: center;
+    font-size: 20px;
+    margin: 30px auto;
+    visibility: hidden;
 }
