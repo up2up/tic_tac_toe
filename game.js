@@ -4,6 +4,10 @@ var indication = document.querySelector(".runs");
 var winnerTxt = document.querySelector("footer");
 var btnX = document.querySelector(".figX");
 var btnO = document.querySelector(".figO");
+var xWinResult = document.querySelector(".xwinning");
+var oWinResult = document.querySelector(".owinning");
+var xWinning = 0;
+var oWinning = 0;
 
 var move;
 var winConditions = [["one", "two", "three"], ["four", "five", "six"], ["seven", "eight", "nine"], ["one", "four", "seven"], ["two", "five", "eight"], ["three", "six", "nine"], ["one", "five", "nine"], ["three", "five", "seven"]];
@@ -11,21 +15,23 @@ var btnRest = document.querySelector(".reset-button");
 
 const playerRun = (figs) => {
     figs === "X" ? move = "X" : move = "O";
-console.log(move);
+    console.log(move);
 }
 
 const tickCell = (event, nextMove) => {
-    if (nextMove == "O") {
-        event.target.textContent = "O";
-        event.target.classList.add("cellO");
-        indication.textContent = "X Turn";
-        nextMove = "X";
-    }
-    else {
-        event.target.textContent = "X";
-        event.target.classList.add("cellX");
-        indication.textContent = "O Turn";
-        nextMove = "O";
+    if (event.target.textContent === "") {
+        if (nextMove == "O") {
+            event.target.textContent = "O";
+            event.target.classList.add("cellO");
+            indication.textContent = "X Turn";
+            nextMove = "X";
+        }
+        else {
+            event.target.textContent = "X";
+            event.target.classList.add("cellX");
+            indication.textContent = "O Turn";
+            nextMove = "O";
+        }
     }
 
     var numberOfO = document.querySelectorAll(".cellO");
@@ -41,7 +47,7 @@ const tickCell = (event, nextMove) => {
 
 const isWin = (markNodeList) => {
     var markPosArr = Array.prototype.slice.call(markNodeList).map(x => x.id);
-    // console.log(markPosArr);
+
     var player = markNodeList[0].textContent;
 
     winConditions.forEach((condition) => {
@@ -52,14 +58,21 @@ const isWin = (markNodeList) => {
 }
 
 const winnerDisplay = (xORo) => {
-    winnerTxt.querySelector("span").textContent = xORo;
-    winnerTxt.style.visibility = "visible";
+    indication.textContent = "The Winner is " + xORo;
+    if (xORo === "X") {
+        xWinning++;
+        xWinResult.textContent = xWinning;
+    }
+    else {
+        oWinning++;
+        oWinResult.textContent = oWinning;
+    }
+
 }
 
 
 const resetGame = () => {
     gameTableCell.forEach((cell) => { cell.textContent = ""; cell.className = "cell" });
-    winnerTxt.style.visibility = "hidden";
     indication.textContent = "Start game or select player";
     move = "";
 }
