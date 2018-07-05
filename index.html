@@ -10,15 +10,26 @@
 </head>
 
 <body>
-  <div class="selection">
+  <header>
+    <h1>Tic-Tac-Toe</h1>
     <div class="result-section">
-      <div class="x-result">X:<span class="xwinning"></span></div>
-      <div class="o-result">O:<span class="owinning"></span></div>
+      <ul>
+        <li class="x-result">
+          <div>X - Player</div>
+          <div class="xwinning">0</div>
+          </li>
+        <li class="o-result">
+            <div>O - Player</div>
+            <div class="owinning">0</div>
+        </li>
+      </ul>
     </div>
+  </header>
+  <div class="selection">
     <button class="figX">X</button>
     <button class="figO">O</button>
   </div>
-  <p class="runs">Start game or select player</p>
+  <div class="runs">Start game or select player</div>
   <div class="table">
     <div class="row">
       <div id="one" class="cell"></div>
