@@ -13,7 +13,7 @@ var move;
 var win = false;
 var winConditions = [["one", "two", "three"], ["four", "five", "six"], ["seven", "eight", "nine"], ["one", "four", "seven"], ["two", "five", "eight"], ["three", "six", "nine"], ["one", "five", "nine"], ["three", "five", "seven"]];
 
-if (sessionStorage.getItem("currentStatus")) {
+const applyStorage = () => {
     var currStatus = JSON.parse(sessionStorage.getItem("currentStatus"));
     var oPlayerPos = currStatus.oPlayer;
     var xPlayerPos = currStatus.xPlayer;
@@ -22,6 +22,7 @@ if (sessionStorage.getItem("currentStatus")) {
     var oResult = sessionStorage.getItem("oPlayerWinTimes");
     xWinResult.textContent = xResult;
     oWinResult.textContent = oResult;
+    move = nextPlayer;
 
     oPlayerPos.forEach((pos) => {
         document.querySelector("#" + pos).textContent = "O";
@@ -33,6 +34,14 @@ if (sessionStorage.getItem("currentStatus")) {
         document.querySelector("#" + pos).classList.add("cellX");
     });
     indication.textContent = nextPlayer + " Turn";
+}
+
+const populateStorage = (status) => {
+    sessionStorage.setItem("currentStatus", JSON.stringify(status));
+}
+
+if (sessionStorage.getItem("currentStatus")) {
+    applyStorage();
 }
 
 const playerRun = (figs) => {
@@ -73,12 +82,6 @@ const tickCell = (event, nextMove) => {
     return nextMove;
 }
 
-const populateStorage = (status) => {
-    sessionStorage.setItem("currentStatus", JSON.stringify(status));
-    // console.log(sessionStorage.getItem("currentStatus"));
-}
-
-
 const isWin = (markNodeList) => {
     var markPosArr = Array.prototype.slice.call(markNodeList).map(x => x.id);
 
@@ -89,6 +92,7 @@ const isWin = (markNodeList) => {
             win = true;
         }
     });
+
     if (win) {
         winnerDisplay(player);
     }
@@ -109,7 +113,6 @@ const winnerDisplay = (xORo) => {
         oWinResult.textContent = oWinning;
         sessionStorage.setItem("oPlayerWinTimes", oWinning);
     }
-
 }
 
 const resetGame = () => {
