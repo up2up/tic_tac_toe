@@ -14,34 +14,40 @@ var win = false;
 var winConditions = [["one", "two", "three"], ["four", "five", "six"], ["seven", "eight", "nine"], ["one", "four", "seven"], ["two", "five", "eight"], ["three", "six", "nine"], ["one", "five", "nine"], ["three", "five", "seven"]];
 
 const applyStorage = () => {
-    var currStatus = JSON.parse(sessionStorage.getItem("currentStatus"));
-    var oPlayerPos = currStatus.oPlayer;
-    var xPlayerPos = currStatus.xPlayer;
-    var nextPlayer = currStatus.whoPlayNext;
-    var xResult = sessionStorage.getItem("xPlayerWinTimes");
-    var oResult = sessionStorage.getItem("oPlayerWinTimes");
-    xWinResult.textContent = xResult;
-    oWinResult.textContent = oResult;
-    move = nextPlayer;
+    if ("currentStatus" in sessionStorage) {
+        var currStatus = JSON.parse(sessionStorage.getItem("currentStatus"));
+        var oPlayerPos = currStatus.oPlayer;
+        var xPlayerPos = currStatus.xPlayer;
+        var nextPlayer = currStatus.whoPlayNext;
+        move = nextPlayer;
 
-    oPlayerPos.forEach((pos) => {
-        document.querySelector("#" + pos).textContent = "O";
-        document.querySelector("#" + pos).classList.add("cellO");
-    });
+        oPlayerPos.forEach((pos) => {
+            document.querySelector("#" + pos).textContent = "O";
+            document.querySelector("#" + pos).classList.add("cellO");
+        });
 
-    xPlayerPos.forEach((pos) => {
-        document.querySelector("#" + pos).textContent = "X";
-        document.querySelector("#" + pos).classList.add("cellX");
-    });
-    indication.textContent = nextPlayer + " Turn";
+        xPlayerPos.forEach((pos) => {
+            document.querySelector("#" + pos).textContent = "X";
+            document.querySelector("#" + pos).classList.add("cellX");
+        });
+        indication.textContent = nextPlayer + " Turn";
+    }
+}
+
+const applyWinnTimes = () => {
+    xWinning = sessionStorage.getItem("xPlayerWinTimes");
+    oWinning = sessionStorage.getItem("oPlayerWinTimes");
+    xWinResult.textContent = xWinning;
+    oWinResult.textContent = oWinning;
 }
 
 const populateStorage = (status) => {
     sessionStorage.setItem("currentStatus", JSON.stringify(status));
 }
 
-if (sessionStorage.getItem("currentStatus")) {
+if (sessionStorage.length>0) {
     applyStorage();
+    applyWinnTimes();
 }
 
 const playerRun = (figs) => {
@@ -120,6 +126,7 @@ const resetGame = () => {
     indication.textContent = "Start game or select player";
     move = "";
     win = false;
+    sessionStorage.removeItem("currentStatus");
 }
 
 btnX.addEventListener("click", () => { playerRun("X") });
