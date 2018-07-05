@@ -10,6 +10,7 @@ var btnRest = document.querySelector(".reset-button");
 var xWinning = 0;
 var oWinning = 0;
 var move;
+var win = false;
 var winConditions = [["one", "two", "three"], ["four", "five", "six"], ["seven", "eight", "nine"], ["one", "four", "seven"], ["two", "five", "eight"], ["three", "six", "nine"], ["one", "five", "nine"], ["three", "five", "seven"]];
 
 if (sessionStorage.getItem("currentStatus")) {
@@ -62,8 +63,10 @@ const tickCell = (event, nextMove) => {
 
     populateStorage(statusPlayers);
 
-    if (numberOfO.length >= 3 || numberOfX.length >= 3) {
+    if (numberOfO.length >= 3 && nextMove === "X") {
         isWin(numberOfO);
+    }
+    else if (numberOfX.length >= 3 && nextMove === "O") {
         isWin(numberOfX);
     }
 
@@ -72,7 +75,7 @@ const tickCell = (event, nextMove) => {
 
 const populateStorage = (status) => {
     sessionStorage.setItem("currentStatus", JSON.stringify(status));
-    console.log(sessionStorage.getItem("currentStatus"));
+    // console.log(sessionStorage.getItem("currentStatus"));
 }
 
 
@@ -83,9 +86,15 @@ const isWin = (markNodeList) => {
 
     winConditions.forEach((condition) => {
         if (condition.every(x => (markPosArr.indexOf(x) !== -1))) {
-            winnerDisplay(player);
+            win = true;
         }
     });
+    if (win) {
+        winnerDisplay(player);
+    }
+    else if (!win && markNodeList.length === 5) {
+        indication.textContent = "Stalemate";
+    }
 }
 
 const winnerDisplay = (xORo) => {
@@ -107,6 +116,7 @@ const resetGame = () => {
     gameTableCell.forEach((cell) => { cell.textContent = ""; cell.className = "cell" });
     indication.textContent = "Start game or select player";
     move = "";
+    win = false;
 }
 
 btnX.addEventListener("click", () => { playerRun("X") });
