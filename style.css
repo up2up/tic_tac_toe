@@ -19,7 +19,7 @@ h1 {
     font-style: oblique;
     margin-top: 10px;
     display: inline-block;
-    width: 48%;
+    width: 47%;
     text-align: right;
 }
 
@@ -48,10 +48,10 @@ li {
 }
 
 .selection {
-    width: 45%;
+    width: 44%;
     height: 80px;
     text-align: right;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .figX, .figO {
@@ -85,7 +85,7 @@ li {
 
 .table {
     /* display: table; */
-    margin: 20px 100px 20px 300px;
+    margin: 15px 100px 20px 300px;
     /* margin-left:300px; */
     table-layout: fixed;
     border: 1px solid lightgray;
@@ -148,7 +148,7 @@ li {
 }
 
 .reset-button {
-    margin: 50px 350px;
+    margin: 20px 350px;
     display: block;
     padding: 15px 32px;
     text-align: center;
