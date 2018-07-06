@@ -35,8 +35,8 @@ const applyStorage = () => {
 }
 
 const applyWinnTimes = () => {
-    xWinning = sessionStorage.getItem("xPlayerWinTimes");
-    oWinning = sessionStorage.getItem("oPlayerWinTimes");
+    xWinning = sessionStorage.getItem("xPlayerWinTimes") !== null ? sessionStorage.getItem("xPlayerWinTimes") : 0;
+    oWinning = sessionStorage.getItem("oPlayerWinTimes") !== null ? sessionStorage.getItem("oPlayerWinTimes") : 0;
     xWinResult.textContent = xWinning;
     oWinResult.textContent = oWinning;
 }
@@ -45,7 +45,7 @@ const populateStorage = (status) => {
     sessionStorage.setItem("currentStatus", JSON.stringify(status));
 }
 
-if (sessionStorage.length>0) {
+if (sessionStorage.length > 0) {
     applyStorage();
     applyWinnTimes();
 }
