@@ -70,12 +70,12 @@ li {
 }
 
 .runs {
-    text-align: right;
+    text-align: center;
     margin-bottom: 30px;
     color: #dce4ec;
     font-size: 20px;
-    padding: 0;
-    width: 43%;
+    width: 20%;
+    margin-left:330px;
 }
 
 .main {
